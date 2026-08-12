@@ -7,7 +7,7 @@ const PROFILE_SEEDS: ProfileSeed[] = [
     id: 'lowe',
     name: 'Lowe',
     displayName: 'Lowe Moss',
-    status: 'Ativo agora',
+    status: 'Online agora',
     phone: '+55 11 986 553',
     pronouns: 'He / Him',
     zodiac: 'Escorpião',

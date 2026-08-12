@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: darksoot
+      POSTGRES_PASSWORD: darksoot
+      POSTGRES_DB: darksoot
+    ports:
+      - "5433:5432"
+    volumes:
+      - darksoot_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U darksoot -d darksoot"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://darksoot:darksoot@db:5432/darksoot?schema=public
+      JWT_SECRET: darksoot-dev-secret-change-me
+      PORT: "3000"
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  darksoot_pg:

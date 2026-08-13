@@ -20,18 +20,27 @@ chaptersRouter.get('/1', async (req, res) => {
     },
   });
 
+  const flags = (progress?.flags ?? {}) as Record<string, unknown>;
+  const unlockPendrive = Boolean(flags.unlock_pendrive_match3);
+  const pendriveDone = Boolean(flags.pendrive_decrypted);
+  const available = unlockPendrive && !pendriveDone;
+
   res.json({
     chapter: {
       id: '1',
       title: 'O número na estrela',
       status: progress?.status ?? 'locked',
       currentNodeId: progress?.currentNodeId,
-      flags: progress?.flags ?? {},
+      flags,
     },
     minigame: {
       gameId: 'pendrive_match3',
       score: minigame?.score ?? 0,
-      completed: Boolean(minigame?.completedAt),
+      completed: Boolean(minigame?.completedAt) || pendriveDone,
+      available,
+      objective: available
+        ? 'Descriptografar ruby_pendrive.enc'
+        : null,
     },
   });
 });

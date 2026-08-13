@@ -47,6 +47,7 @@ export type Contact = {
   name: string;
   status: string;
   avatarKey: string;
+  phone: string;
   unlocked: boolean;
 };
 

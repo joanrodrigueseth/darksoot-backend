@@ -26,7 +26,10 @@ minigamesRouter.post('/pendrive/complete', async (req, res) => {
   const flags = (chapter?.flags as Record<string, boolean>) ?? {};
 
   if (!flags.unlock_pendrive_match3) {
-    res.status(400).json({ error: 'Minigame not unlocked' });
+    res.status(400).json({
+      error: 'Minigame not unlocked',
+      code: 'MINIGAME_LOCKED',
+    });
     return;
   }
 

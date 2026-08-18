@@ -72,6 +72,19 @@ chatsRouter.get('/:contactId', async (req, res) => {
     });
   }
 
+  if (!chat && contact.unlocked) {
+    chat = await prisma.chatState.create({
+      data: {
+        playerId,
+        contactId,
+        messages: [],
+        currentNodeId: null,
+        pendingChoices: null,
+        unread: 0,
+      },
+    });
+  }
+
   if (!chat) {
     res.status(404).json({ error: 'Chat not available' });
     return;

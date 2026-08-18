@@ -11,6 +11,36 @@ export const loweChapter1Nodes: StoryNode[] = [
     messages: [{ from: 'npc', kind: 'text', text: 'Oi Mc' }],
     choices: [
       { id: 'r_oi', label: 'Oi?', replies: ['Oi?'], next: 'lowe_introduces' },
+      {
+        id: 'r_oi_premium',
+        label: 'Lowe? Sou eu. Senti que alguma coisa estava errada.',
+        replies: ['Lowe? Sou eu. Senti que alguma coisa estava errada.'],
+        next: 'lowe_sensed',
+        premium: true,
+        priceGems: 15,
+      },
+    ],
+  },
+  {
+    id: 'lowe_sensed',
+    contactId: 'lowe',
+    onEnter: [{ setFlag: 'premium_greeting' }],
+    messages: [
+      { from: 'npc', kind: 'text', text: 'Mc…' },
+      { from: 'npc', kind: 'text', text: 'Então você também sentiu.' },
+      {
+        from: 'npc',
+        kind: 'text',
+        text: 'Sou eu. O Lowe, irmão da Ruby.',
+      },
+    ],
+    choices: [
+      {
+        id: 'r_premium_how',
+        label: 'Como vocês estão?',
+        replies: ['Como vocês estão?'],
+        next: 'lowe_asks_ruby',
+      },
     ],
   },
   {

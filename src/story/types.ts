@@ -9,6 +9,9 @@ export type StoryChoice = {
   next: string;
   /** Bolhas enviadas pela MC ao escolher (se omitido, usa o label sem A)/B)) */
   replies?: string[];
+  /** Resposta especial paga com diamantes. */
+  premium?: boolean;
+  priceGems?: number;
 };
 
 export type StoryAction = {

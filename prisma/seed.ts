@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Darksoot seed — Capítulo 1');
   console.log('Story source: server/src/story/chapter1/lowe.ts');
-  console.log('Contacts: Lowe (unlocked), Luke/Olivia/Scar (locked stubs)');
+  console.log('Contacts: Lowe/Liv (unlocked), Luke/Olivia/Scar (locked stubs)');
   const players = await prisma.player.count();
   const chapters = await prisma.chapterProgress.count();
   const chats = await prisma.chatState.count();
